@@ -1,0 +1,921 @@
+MerchantRegister.jsx
+"use client";
+
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+  Box,
+  InputAdornment,
+  Tooltip,
+  IconButton,
+  Card,
+  CardContent,
+  Divider,
+  ClickAwayListener,
+} from "@mui/material";
+import {
+  Business as BusinessIcon,
+  Store as VendorIcon,
+  Key as KeyIcon,
+  Link as UrlIcon,
+  AccountBalance as MerchantIcon,
+  Search as SearchIcon,
+  Save as SaveIcon,
+  Clear as ClearIcon,
+  Info as InfoIcon,
+  KeyboardArrowDown as ArrowDownIcon,
+} from "@mui/icons-material";
+import { useSnackbar } from "notistack";
+import merchantApi from "../../services/merchantApi";
+import VendorApi from "../../services/vendorApi";
+import "./MerchantRegister.css";
+
+const MerchantRegister = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const [vendor, setVendor] = useState(null);
+  const [selectedVendor, setSelectedVendor] = useState(null);
+  const [vendorDropdownOpen, setVendorDropdownOpen] = useState(false);
+  const [vendorSearchText, setVendorSearchText] = useState("");
+
+  // Filtered data states
+  const [filteredVendors, setFilteredVendors] = useState([]);
+
+  // Form state
+  const [formData, setFormData] = useState({
+    merchantsId: "",
+    gatewayName: "",
+    providerId: "",
+    providerName: "",
+    merchantId: "",
+    merchantName: "",
+    merchantVPA: "",
+    merchantKey: "",
+    mcc: "",
+    keyIndex: "",
+    baseUrl: "",
+    publicKeyPath: "",
+    privateKeyPath: "",
+  });
+
+  // Loading and error states
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  // Fetch vendors
+  const fetchVendor = async () => {
+    try {
+      const response = await VendorApi.getVendorDetails();
+      if (response.success) {
+        setVendor(response.data);
+        setFilteredVendors(response.data);
+        console.log("Fetched vendors:", response.data); // Debug: Check structure
+
+        const vendorId = localStorage.getItem("vendorId");
+        if (vendorId && response.data) {
+          const currentVendor = response.data.find((v) => v.id === vendorId);
+          if (currentVendor) {
+            setSelectedVendor(currentVendor);
+            console.log("Auto-selected vendor from localStorage:", currentVendor); // Debug
+          }
+        }
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message || "Failed to fetch vendors.";
+      console.error("Vendor fetch error:", error);
+      enqueueSnackbar(errorMessage, { variant: "error" });
+    }
+  };
+
+  useEffect(() => {
+    fetchVendor();
+  }, []);
+
+  // Filter vendors based on search text
+  const filterVendors = (searchText) => {
+    if (!vendor) return;
+
+    if (!searchText.trim()) {
+      setFilteredVendors(vendor);
+      return;
+    }
+
+    const filtered = vendor.filter(
+      (v) =>
+        v.id.toString().toLowerCase().includes(searchText.toLowerCase()) ||
+        v.Name.toLowerCase().includes(searchText.toLowerCase()) ||
+        v.shortname.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredVendors(filtered);
+  };
+
+  // Handle vendor search
+  const handleVendorSearch = (e) => {
+    const searchText = e.target.value;
+    setVendorSearchText(searchText);
+    filterVendors(searchText);
+  };
+
+  // Handle vendor selection
+  const handleVendorSelect = (selectedVendorItem) => {
+    console.log("Selected vendor item:", selectedVendorItem); // Debug: Check if id exists
+    setSelectedVendor(selectedVendorItem);
+    setVendorDropdownOpen(false);
+    setVendorSearchText("");
+    setFilteredVendors(vendor);
+
+    if (errors.vendor) {
+      setErrors((prev) => ({
+        ...prev,
+        vendor: "",
+      }));
+    }
+  };
+
+  // Handle input changes
+  const handleInputChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+
+    if (errors[field]) {
+      setErrors((prev) => ({
+        ...prev,
+        [field]: "",
+      }));
+    }
+  };
+
+  // Validate form
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!selectedVendor) {
+      newErrors.vendor = "Please select a vendor";
+    }
+
+    if (!formData.merchantsId.trim()) {
+      newErrors.merchantsId = "Merchants ID is required";
+    }
+
+    if (!formData.gatewayName.trim()) {
+      newErrors.gatewayName = "Gateway name is required";
+    }
+
+    if (!formData.providerId.trim()) {
+      newErrors.providerId = "Provider ID is required";
+    }
+
+    if (!formData.providerName.trim()) {
+      newErrors.providerName = "Provider name is required";
+    }
+
+    if (!formData.merchantId.trim()) {
+      newErrors.merchantId = "Merchant ID is required";
+    }
+
+    if (!formData.merchantName.trim()) {
+      newErrors.merchantName = "Merchant name is required";
+    }
+
+    if (!formData.merchantVPA.trim()) {
+      newErrors.merchantVPA = "Merchant VPA is required";
+    }
+
+    if (!formData.mcc.trim()) {
+      newErrors.mcc = "MCC is required";
+    }
+
+    if (!formData.keyIndex.trim()) {
+      newErrors.keyIndex = "Key index is required";
+    }
+
+    if (!formData.baseUrl.trim()) {
+      newErrors.baseUrl = "Base URL is required";
+    }
+
+    if (!formData.publicKeyPath.trim()) {
+      newErrors.publicKeyPath = "Public key path is required";
+    }
+
+    if (!formData.privateKeyPath.trim()) {
+      newErrors.privateKeyPath = "Private key path is required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      enqueueSnackbar("Please fix the errors in the form", {
+        variant: "error",
+      });
+      return;
+    }
+
+    // Extra check for vendor id - using 'id' from your data structure
+    if (!selectedVendor || !selectedVendor.id) {
+      console.error("Invalid vendor selection:", selectedVendor); // Debug
+      enqueueSnackbar("Please select a valid vendor with id", { variant: "error" });
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const payload = {
+        Merchants_id: formData.merchantsId.trim(),
+        Gatewayname: formData.gatewayName.trim(),
+        ProviderID: formData.providerId.trim(),
+        ProviderName: formData.providerName.trim(),
+        MerchantId: formData.merchantId.trim(),
+        MerchantName: formData.merchantName.trim(),
+        MerchantVPA: formData.merchantVPA.trim(),
+        MerchantKey: formData.merchantKey.trim() || "",
+        MCC: formData.mcc.trim(),
+        KeyIndex: formData.keyIndex.trim(),
+        BaseUrl: formData.baseUrl.trim(),
+        PublicKeyPath: formData.publicKeyPath.trim(),
+        PrivateKeyPath: formData.privateKeyPath.trim(),
+        Vendor_id: selectedVendor.id,  // Map 'id' to 'Vendor_id' for backend
+      };
+
+      // Debug: Log the payload to console (remove in production)
+      console.log("Sending payload:", payload);
+
+      const response = await merchantApi.regmerchant(payload);
+
+      if (response && response.message === "Merchant register Successfull") {
+        enqueueSnackbar("Merchant registered successfully!", {
+          variant: "success",
+        });
+        handleClear();
+      } else {
+        const errorMsg = response?.message || "Failed to register merchant";
+        enqueueSnackbar(errorMsg, {
+          variant: "error",
+        });
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Something went wrong. Please try again later.";
+      console.error("Merchant registration error:", error);
+      enqueueSnackbar(errorMessage, { variant: "error" });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Clear form
+  const handleClear = () => {
+    setFormData({
+      merchantsId: "",
+      gatewayName: "",
+      providerId: "",
+      providerName: "",
+      merchantId: "",
+      merchantName: "",
+      merchantVPA: "",
+      merchantKey: "",
+      mcc: "",
+      keyIndex: "",
+      baseUrl: "",
+      publicKeyPath: "",
+      privateKeyPath: "",
+    });
+    setSelectedVendor(null);
+    setErrors({});
+  };
+
+  // Get current vendor ID from localStorage for highlighting
+  const getCurrentVendorId = () => {
+    return localStorage.getItem("vendorId");
+  };
+
+  return (
+    <div className="merchant-register-container">
+      <Container maxWidth="lg" className="merchant-register-main-container">
+        {/* Page Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="merchant-register-header"
+        >
+          <Box className="merchant-register-title-section">
+            <MerchantIcon className="merchant-register-title-icon" />
+            <div>
+              <Typography variant="h4" className="merchant-register-title">
+                Merchant Registration
+              </Typography>
+              <Typography
+                variant="body1"
+                className="merchant-register-subtitle"
+              >
+                Register new merchants with complete configuration details
+              </Typography>
+            </div>
+          </Box>
+        </motion.div>
+
+        {/* Registration Form */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <Card className="merchant-register-form-card" elevation={3}>
+            <CardContent className="merchant-register-form-content">
+              <Box className="merchant-register-form-header">
+                <BusinessIcon className="merchant-register-form-icon" />
+                <Typography
+                  variant="h6"
+                  className="merchant-register-form-title"
+                >
+                  Merchant Information
+                </Typography>
+              </Box>
+
+              <Divider className="merchant-register-form-divider" />
+
+              <form onSubmit={handleSubmit} className="merchant-register-form">
+                <Grid container spacing={3}>
+                  {/* Vendor Selection */}
+                  <Grid item xs={12} className="merchant-register-input-grid">
+                    <ClickAwayListener
+                      onClickAway={() => setVendorDropdownOpen(false)}
+                    >
+                      <Box className="merchant-register-vendor-dropdown-container">
+                        <TextField
+                          fullWidth
+                          label="Select Vendor"
+                          value={selectedVendor ? selectedVendor.Name : ""}
+                          onClick={() =>
+                            setVendorDropdownOpen(!vendorDropdownOpen)
+                          }
+                          error={!!errors.vendor}
+                          helperText={errors.vendor || "Select the vendor"}
+                          disabled={loading}
+                          InputProps={{
+                            readOnly: true,
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <VendorIcon color="primary" />
+                              </InputAdornment>
+                            ),
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <ArrowDownIcon
+                                  className={`merchant-register-dropdown-arrow ${
+                                    vendorDropdownOpen ? "open" : ""
+                                  }`}
+                                />
+                              </InputAdornment>
+                            ),
+                          }}
+                          className="merchant-register-input merchant-register-dropdown-input"
+                          placeholder="Choose a vendor from the list"
+                        />
+
+                        {vendorDropdownOpen && vendor && (
+                          <Box className="merchant-register-vendor-dropdown-menu">
+                            <Box className="merchant-register-vendor-dropdown-header">
+                              <Typography className="merchant-register-vendor-dropdown-title">
+                                Select Vendor
+                              </Typography>
+                              <TextField
+                                size="small"
+                                placeholder="Search by vendor name or short name..."
+                                value={vendorSearchText}
+                                onChange={handleVendorSearch}
+                                InputProps={{
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <SearchIcon
+                                        fontSize="small"
+                                        sx={{ color: "white" }}
+                                      />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                                sx={{
+                                  width: "100%",
+                                  "& .MuiOutlinedInput-root": {
+                                    color: "white",
+                                    "& fieldset": {
+                                      borderColor: "white",
+                                    },
+                                    "&:hover fieldset": {
+                                      borderColor: "white",
+                                    },
+                                    "&.Mui-focused fieldset": {
+                                      borderColor: "white",
+                                    },
+                                  },
+                                  "& .MuiInputBase-input::placeholder": {
+                                    color: "white",
+                                    opacity: 0.7,
+                                  },
+                                }}
+                              />
+                            </Box>
+                            <Box className="merchant-register-vendor-table-container">
+                              <Box className="merchant-register-vendor-table-header">
+                                <Box className="merchant-register-vendor-table-cell header">
+                                  ID
+                                </Box>
+                                <Box className="merchant-register-vendor-table-cell header">
+                                  Vendor Name
+                                </Box>
+                                <Box className="merchant-register-vendor-table-cell header">
+                                  Short Name
+                                </Box>
+                              </Box>
+                              <Box className="merchant-register-vendor-table-body">
+                                {filteredVendors.length > 0 ? (
+                                  filteredVendors.map((v) => (
+                                    <Box
+                                      key={v.id}
+                                      className={`merchant-register-vendor-table-row ${
+                                        selectedVendor?.id === v.id
+                                          ? "selected"
+                                          : ""
+                                      } ${
+                                        getCurrentVendorId() === v.id.toString()
+                                          ? "current"
+                                          : ""
+                                      }`}
+                                      onClick={() => handleVendorSelect(v)}
+                                    >
+                                      <Box className="merchant-register-vendor-table-cell">
+                                        {v.id}
+                                      </Box>
+                                      <Box className="merchant-register-vendor-table-cell">
+                                        {v.Name}
+                                      </Box>
+                                      <Box className="merchant-register-vendor-table-cell">
+                                        <span className="merchant-register-vendor-short-name-badge">
+                                          {v.shortname}
+                                        </span>
+                                      </Box>
+                                    </Box>
+                                  ))
+                                ) : (
+                                  <Box className="merchant-register-vendor-table-row">
+                                    <Box className="merchant-register-vendor-table-cell" style={{ textAlign: "center", padding: "10px" }}>
+                                      No vendors found
+                                    </Box>
+                                  </Box>
+                                )}
+                              </Box>
+                            </Box>
+                          </Box>
+                        )}
+                      </Box>
+                    </ClickAwayListener>
+                  </Grid>
+
+                  {/* Merchants ID */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Merchants ID"
+                      value={formData.merchantsId}
+                      onChange={(e) =>
+                        handleInputChange("merchantsId", e.target.value)
+                      }
+                      error={!!errors.merchantsId}
+                      helperText={errors.merchantsId}
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MerchantIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="Enter merchants ID"
+                    />
+                  </Grid>
+
+                  {/* Gateway Name */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Gateway Name"
+                      value={formData.gatewayName}
+                      onChange={(e) =>
+                        handleInputChange("gatewayName", e.target.value)
+                      }
+                      error={!!errors.gatewayName}
+                      helperText={errors.gatewayName}
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MerchantIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="Enter gateway name"
+                    />
+                  </Grid>
+
+                  {/* Provider ID */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Provider ID"
+                      value={formData.providerId}
+                      onChange={(e) =>
+                        handleInputChange("providerId", e.target.value)
+                      }
+                      error={!!errors.providerId}
+                      helperText={errors.providerId}
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <KeyIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="Enter provider ID"
+                    />
+                  </Grid>
+
+                  {/* Provider Name */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Provider Name"
+                      value={formData.providerName}
+                      onChange={(e) =>
+                        handleInputChange("providerName", e.target.value)
+                      }
+                      error={!!errors.providerName}
+                      helperText={errors.providerName}
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MerchantIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="Enter provider name"
+                    />
+                  </Grid>
+
+                  {/* Merchant ID */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Merchant ID"
+                      value={formData.merchantId}
+                      onChange={(e) =>
+                        handleInputChange("merchantId", e.target.value)
+                      }
+                      error={!!errors.merchantId}
+                      helperText={errors.merchantId}
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <KeyIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="Enter merchant ID"
+                    />
+                  </Grid>
+
+                  {/* Merchant Name */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Merchant Name"
+                      value={formData.merchantName}
+                      onChange={(e) =>
+                        handleInputChange("merchantName", e.target.value)
+                      }
+                      error={!!errors.merchantName}
+                      helperText={errors.merchantName}
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MerchantIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="Enter merchant name"
+                    />
+                  </Grid>
+
+                  {/* Merchant VPA */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Merchant VPA"
+                      value={formData.merchantVPA}
+                      onChange={(e) =>
+                        handleInputChange("merchantVPA", e.target.value)
+                      }
+                      error={!!errors.merchantVPA}
+                      helperText={errors.merchantVPA}
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MerchantIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="Enter merchant VPA"
+                    />
+                  </Grid>
+
+                  {/* Merchant Key */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Merchant Key"
+                      value={formData.merchantKey}
+                      onChange={(e) =>
+                        handleInputChange("merchantKey", e.target.value)
+                      }
+                      error={!!errors.merchantKey}
+                      helperText={
+                        errors.merchantKey || "Enter merchant key (optional)"
+                      }
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <KeyIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Tooltip
+                              title="Enter a unique merchant key (optional)"
+                              arrow
+                            >
+                              <IconButton size="small">
+                                <InfoIcon fontSize="small" />
+                              </IconButton>
+                            </Tooltip>
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="Enter merchant key"
+                    />
+                  </Grid>
+
+                  {/* MCC */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="MCC"
+                      value={formData.mcc}
+                      onChange={(e) => handleInputChange("mcc", e.target.value)}
+                      error={!!errors.mcc}
+                      helperText={errors.mcc || "Enter Merchant Category Code"}
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <MerchantIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="Enter MCC"
+                    />
+                  </Grid>
+
+                  {/* Key Index */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Key Index"
+                      value={formData.keyIndex}
+                      onChange={(e) =>
+                        handleInputChange("keyIndex", e.target.value)
+                      }
+                      error={!!errors.keyIndex}
+                      helperText={errors.keyIndex}
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <KeyIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="Enter key index"
+                    />
+                  </Grid>
+
+                  {/* Base URL */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Base URL"
+                      value={formData.baseUrl}
+                      onChange={(e) =>
+                        handleInputChange("baseUrl", e.target.value)
+                      }
+                      error={!!errors.baseUrl}
+                      helperText={
+                        errors.baseUrl || "Enter the base URL for the merchant"
+                      }
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <UrlIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="https://api.example.com"
+                    />
+                  </Grid>
+
+                  {/* Public Key Path */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Public Key Path"
+                      value={formData.publicKeyPath}
+                      onChange={(e) =>
+                        handleInputChange("publicKeyPath", e.target.value)
+                      }
+                      error={!!errors.publicKeyPath}
+                      helperText={
+                        errors.publicKeyPath || "Enter the public key path"
+                      }
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <KeyIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="/path/to/public/key"
+                    />
+                  </Grid>
+
+                  {/* Private Key Path */}
+                  <Grid
+                    item
+                    xs={12}
+                    md={6}
+                    className="merchant-register-input-grid"
+                  >
+                    <TextField
+                      fullWidth
+                      label="Private Key Path"
+                      value={formData.privateKeyPath}
+                      onChange={(e) =>
+                        handleInputChange("privateKeyPath", e.target.value)
+                      }
+                      error={!!errors.privateKeyPath}
+                      helperText={
+                        errors.privateKeyPath || "Enter the private key path"
+                      }
+                      disabled={loading}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <KeyIcon color="primary" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      className="merchant-register-input"
+                      placeholder="/path/to/private/key"
+                    />
+                  </Grid>
+                </Grid>
+
+                {/* Form Actions */}
+                <Box className="merchant-register-form-actions">
+                  <Button
+                    type="button"
+                    variant="outlined"
+                    startIcon={<ClearIcon />}
+                    onClick={handleClear}
+                    disabled={loading}
+                    className="merchant-register-clear-button"
+                  >
+                    Clear Form
+                  </Button>
+
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    startIcon={<SaveIcon />}
+                    disabled={loading}
+                    className="merchant-register-submit-button"
+                  >
+                    {loading ? "Registering..." : "Register Merchant"}
+                  </Button>
+                </Box>
+              </form>
+            </CardContent>
+          </Card>
+        </motion.div>
+      </Container>
+    </div>
+  );
+};
+
+export default MerchantRegister;
+
+payment 
+
+'7', 'PhonePe', 'BHARATHVENDING', 'Bharath Vending Corporation', 'BHARATHVENDINGCORP', 'Bharath Vending Corporation', 'BHARATHVENDINGCORP@ybl', '75da7f57-124f-4da5-9042-98c7e870f9f5', '5812', '1', 'https://mercury-t2.phonepe.com', NULL, NULL, '2'
