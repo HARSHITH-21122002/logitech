@@ -1,0 +1,139 @@
+/* New wrapper to manage the entire page layout */
+.vending-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #3E3E3E;
+}
+
+/* 
+  HEADER STYLES
+*/
+.add-selectpayment-header {
+  width: 100%;
+  background-color: #4a4a4a;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0.8rem 1.5rem; /* <<< CHANGED: Slightly reduced vertical padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.add-selectpayment-header-title {
+  font-size: 1.8rem; /* <<< CHANGED: Reduced from 2rem for a cleaner look */
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+.add-selectpayment-home-logo-btn {
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  /* Padding is removed from here as we are sizing the image directly */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 60px;  /* <<< CHANGED: Using fixed width and height */
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-selectpayment-home-logo-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 
+  === STYLE FOR YOUR LOGO IMAGE ===
+*/
+.header-logo-image {
+  width: 80px;  /* <<< CHANGED: Set a fixed, smaller width */
+  height: 80px; /* <<< CHANGED: Set a fixed, smaller height */
+  object-fit: contain; /* This ensures your entire logo is visible without being stretched or cropped */
+}
+
+/*
+  CONTENT CONTAINER
+*/
+.vending-container {
+  flex-grow: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- Vending Page Status Header --- */
+.vending-status-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.vending-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #d22;
+  margin-bottom: 0.5rem;
+}
+
+.vending-title.error {
+  color: #e74c3c;
+}
+
+.vending-subtitle {
+  font-size: 1.1rem;
+  color: #26d452;
+  margin: 0;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 
+  ==================================================================
+  === CORRECTED PRODUCT CONTAINER USING FLEXBOX FOR CENTERING    ===
+  ==================================================================
+*/
+.vending-product-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem; /* The space between cards */
+  width: 100%;
+  padding: 1rem; /* Add some padding so cards don't touch the edge */
+}
+
+/* --- Responsive Adjustments for Smaller Screens --- */
+@media (max-width: 768px) {
+  .vending-title {
+    font-size: 1.8rem;
+  }
+  .vending-subtitle {
+    font-size: 1rem;
+  }
+  .vending-product-grid {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .vending-container {
+    padding: 1.5rem 1rem;
+  }
+  .vending-product-grid {
+    gap: 1rem;
+  }
+}
+

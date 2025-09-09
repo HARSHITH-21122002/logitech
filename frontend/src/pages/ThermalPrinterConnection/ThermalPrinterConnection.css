@@ -1,0 +1,161 @@
+.thermal-printer-connection {
+  padding: 16px;
+  border-radius: 8px;
+  background: #f5f5f5;
+  margin-bottom: 16px;
+}
+
+.printer-status {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.status-connected,
+.status-disconnected {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.status-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.status-icon.success {
+  color: #2e7d32;
+}
+
+.status-icon.error {
+  color: #d32f2f;
+}
+
+.status-connected {
+  color: #2e7d32;
+}
+
+.status-disconnected {
+  color: #d32f2f;
+}
+
+.printer-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.connected-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.connect-button,
+.print-button,
+.test-button,
+.disconnect-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+}
+
+.button-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.button-icon.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.connect-button,
+.print-button {
+  background: #1976d2;
+  color: white;
+  min-width: 160px;
+}
+
+.connect-button:hover,
+.print-button:hover {
+  background: #1565c0;
+}
+
+.connect-button:disabled,
+.print-button:disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.test-button {
+  background: white;
+  color: #1976d2;
+  border: 1px solid #1976d2;
+  min-width: 120px;
+}
+
+.test-button:hover {
+  background: #f5f5f5;
+}
+
+.disconnect-button {
+  background: white;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+  min-width: 120px;
+}
+
+.disconnect-button:hover {
+  background: #ffebee;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 6px;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.alert.error {
+  background: #ffebee;
+  color: #d32f2f;
+  border: 1px solid #ffcdd2;
+}
+
+.alert.success {
+  background: #e8f5e8;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+}
+
+.alert-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 768px) {
+  .connected-controls {
+    flex-direction: column;
+  }
+  
+  .connected-controls > * {
+    width: 100%;
+  }
+}

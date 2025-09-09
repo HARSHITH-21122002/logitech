@@ -1,0 +1,269 @@
+/* --- Global & Page Setup --- */
+.spiral-pagespiral {
+  /* REMOVED: display: flex and its alignment properties. This is the key fix
+     that allows the top padding to work correctly. */
+
+  min-height: 100vh;
+  width: 100vw !important;
+  padding: 10vh 0 0 0 !important; /* This now correctly pushes content down */
+  background: #3E3E3E;
+  font-family: "Segoe UI", "Roboto", sans-serif;
+  overflow: scroll !important;
+  box-sizing: border-box;
+}
+
+/* This is the wrapper for your reusable Header. It works perfectly. */
+.spiral-header-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1500;
+}
+
+
+/* --- Spiral Grid Container --- */
+.spiral-grid-containerspiral {
+  width: 100%;
+  max-width: 100vw !important;
+  max-height: 200vh !important;
+  height: calc(100% - 110px); 
+  overflow: scroll !important;
+  align-items: center;
+  
+  /* CRITICAL FIX: The negative top margin is removed. */
+  /* The side margins are kept. */
+  margin: 0 2vw; 
+}
+
+
+/* --- The Grid Itself --- */
+.spiral-gridspiral {
+  display: grid;
+  align-content: center !important;
+  grid-template-columns: repeat(10, 1fr) !important; 
+  gap: 1rem 1rem !important;
+  overflow: scroll !important;
+}
+
+
+/* --- Motor Card (Unchanged) --- */
+.motor-cardspiral {
+  width: 120px !important;
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background-color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: fixed;
+  justify-content: space-between;
+  padding: 10px;
+  box-sizing: border-box;
+  /* overflow: hidden; */
+  overflow: scroll !important;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.motor-cardspiral.activespiral {
+  background-color: #2e7d32;
+  border-color: #1b5e20;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.4);
+}
+.motor-cardspiral.activespiral .spiral-numberspiral {
+  color: #ffffff;
+}
+
+.spring-imagespiral {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  height: 65%;
+  object-fit: contain;
+  opacity: 0.1;
+  pointer-events: none;
+}
+.spiral-numberspiral {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: #424242;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+/* --- Attractive Toggle Switch (Unchanged) --- */
+.toggle-switchspiral {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 32px;
+  z-index: 1;
+}
+.toggle-switchspiral input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.sliderspiral {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #d22330;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  border-radius: 32px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+.sliderspiral:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d22330' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+  background-size: 60%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+input:checked + .sliderspiral {
+  background-color: #43a047;
+}
+input:checked + .sliderspiral:before {
+  transform: translateX(28px);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2343a047' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+/* --- Fixed Buttons (Unchanged) --- */
+.fixed-back-btnspiral,
+.fixed-manage-btnspiral,
+.fixed-save-btnspiral {
+  position: fixed !important;
+  bottom: 20px;
+  background-color: #d22330 !important;
+  color: white !important;
+  padding: 0.6rem 1.2rem !important;
+  border-radius: 8px !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 120px !important;
+  transition: all 0.3s ease !important;
+}
+.fixed-back-btnspiral { left: 20px; }
+.fixed-manage-btnspiral { right: 20px; }
+.fixed-save-btnspiral { right: 150px; }
+
+/* --- Slide-out Panel (Unchanged) --- */
+.panel-backdropspiral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1999;
+}
+.manage-panelspiral {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: clamp(320px, 90vw, 450px);
+  background-color: #e0e0e0;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.2);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+}
+.panel-headerspiral {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ccc;
+  flex-shrink: 0;
+}
+.panel-headerspiral h3 { color: #333; }
+.panel-contentspiral {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex-grow: 1;
+}
+.modal-inputspiral .MuiOutlinedInput-root { background-color: #ffffff !important; }
+.modal-inputspiral .MuiOutlinedInput-input {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #000000;
+}
+.modal-actionsspiral {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modal-action-btnspiral {
+  background-color: #d22330 !important;
+  color: white !important;
+  padding: 10px !important;
+  font-weight: 600 !important;
+}
+
+/* Number Pad in Panel (Unchanged) */
+.number-pad-containerspiral {
+  align-self: center; 
+  background-color: #585858;
+  padding: 1rem;
+  border-radius: 12px;
+}
+.number-pad-gridspiral {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+.num-keyspiral {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: #ffbf00;
+  color: #000000;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* --- Responsive Design (Modified) --- */
+@media (max-width: 768px) {
+  .spiral-pagespiral { 
+    padding: 120px 0px 100px 0px; 
+  } 
+  /* .fixed-save-btnspiral { display: none !important; } */
+
+  /* ADDED: Reduce the gap between grid items on smaller screens */
+  .spiral-gridspiral {
+    gap: 1rem;
+  }
+}
+@media (max-width: 576px) {
+  .fixed-back-btnspiral, .fixed-manage-btnspiral { padding: 8px 16px !important; font-size: 0.9rem !important; }
+  .page-titlespiral { font-size: 1.75rem; }
+  .page-logospiral { right: auto; left: 20px; height: 35px; } /* Adjusted logo position */
+
+  /* ADDED: Further reduce the gap on very small screens */
+  .spiral-gridspiral {
+    gap: 0.5rem;
+  }
+}

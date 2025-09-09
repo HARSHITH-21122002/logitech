@@ -1,0 +1,26 @@
+.number-pad {
+  width: 100%;
+}
+
+.number-pad__button {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.number-pad__button:hover {
+  background: linear-gradient(145deg, #4a4a4a 0%, #3a3a3a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.number-pad__button:active {
+  transform: translateY(0);
+}

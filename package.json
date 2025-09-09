@@ -1,0 +1,98 @@
+{
+  "name": "single_cabin",
+  "version": "1.0.0",
+  "description": "Caterpillar Smart Vending Application with React, Electron, and Python backend.",
+  "author": "BVC",
+  "main": "main/main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run dev:frontend\" \"wait-on http://localhost:5173 && electron .\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac",
+    "dist:linux": "npm run build && electron-builder --linux",
+    "clean": "rimraf BVC && rimraf frontend/dist",
+    "postinstall": "cd frontend && npm install"
+  },
+  "build": {
+    "appId": "com.BVC.SINGLE_CABIN",
+    "productName": "BVC",
+    "directories": {
+      "buildResources": "assets",
+      "output": "BVC"
+    },
+    "files": [
+      "main/**",
+      "preload/**",
+      "frontend/dist/**",
+      "vm-backend/**",
+      "assets/**",
+      "logs/**",
+      "!frontend/src/**",
+      "!frontend/public/**",
+      "!frontend/node_modules/**"
+    ],
+    "extraResources": [
+      {
+        "from": "vm-backend",
+        "to": "vm-backend"
+      },
+      {
+        "from": "logs",
+        "to": "logs",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "mac": {
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.business"
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "electron": "^36.2.1",
+    "electron-builder": "^26.0.12",
+    "rimraf": "^5.0.5",
+    "wait-on": "^7.2.0"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "cors": "^2.8.5",
+    "electron-is-dev": "^3.0.1",
+    "express": "^5.1.0",
+    "macaddress": "^0.5.3"
+  }
+}

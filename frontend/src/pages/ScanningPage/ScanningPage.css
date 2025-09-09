@@ -1,0 +1,461 @@
+/* ==========================================================================
+   Scanning Page Styles
+   ========================================================================== */
+
+/* --- Main Layout --- */
+.scanning-page-scan {
+    min-height: 100vh;
+    background: #3E3E3E;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.scanning-content-scan {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.rfid-section-scan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.topup-prompt-scan {
+    color: #e0e0e0;
+    font-weight: 500 !important;
+    margin-bottom: 1rem !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+/* --- RFID Scan Card --- */
+/* ==========================================================================
+   RFID Scan Card - Professional & Sleek Theme
+   ========================================================================== */
+
+/* --- New Professional Color Palette Variables --- */
+:root {
+    --prof-bg: #F4F6F8;             /* Light, clean background for the page */
+    --prof-card-bg: #FFFFFF;        /* Crisp white for the card */
+    --prof-primary-blue: #0D47A1;    /* Deep, trustworthy corporate blue */
+    --prof-secondary-blue: #42A5F5;  /* A lighter, more vibrant blue for highlights */
+    --prof-text-dark: #212121;      /* Very dark gray for high-contrast text */
+    --prof-text-light: #616161;     /* Medium gray for secondary/status text */
+}
+
+/* --- RFID Card Styles --- */
+.rfid-card-scan {
+    background: var(--prof-card-bg) !important;
+    border-radius: 24px !important;
+    padding: 3rem !important;
+    min-width: 380px;
+    position: relative;
+    overflow: hidden; /* Changed from visible for cleaner edges */
+    border: 1px solid #E0E0E0 !important; /* Subtle border for definition */
+    /* Soft, professional shadow */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rfid-card-scan:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+.rfid-card-content-scan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.scan-circle-scan {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    /* A modern, professional blue gradient */
+    background: linear-gradient(145deg, var(--prof-secondary-blue), var(--prof-primary-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* A subtle glow effect using the same blue color */
+    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.4);
+}
+
+.contactless-icon-scan {
+    font-size: 4.5rem !important; /* Slightly larger for more impact */
+    color: #FFFFFF !important; /* White icon for perfect contrast on the blue circle */
+    z-index: 2;
+    animation: pulse 2.5s ease-in-out infinite;
+}
+
+/* --- Animation Styles - More Subtle and Professional --- */
+.orbit-animation-scan {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.orbit-ring-scan {
+    position: absolute;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    animation: orbit 4s linear infinite;
+    opacity: 0.8;
+}
+
+/* Rings use the theme's colors for a cohesive look */
+.orbit-ring-scan.ring-1-scan {
+    animation-delay: 0s;
+    border: 2px solid rgba(var(--prof-primary-blue), 0.3);
+}
+
+.orbit-ring-scan.ring-2-scan {
+    animation-delay: 1.3s;
+    border: 1px dashed rgba(var(--prof-secondary-blue), 0.5);
+}
+
+.orbit-ring-scan.ring-3-scan {
+    animation-delay: 2.6s;
+    border: 2px solid rgba(var(--prof-primary-blue), 0.2);
+}
+
+/* --- Text Styles - Prioritizing Clarity and Visibility --- */
+.rfid-text-scan {
+    font-size: 1.8rem !important;
+    font-weight: 600 !important;
+    /* Solid, dark text is more professional and readable than a gradient */
+    color: var(--prof-text-dark) !important;
+    text-align: center;
+    /* Resetting webkit properties to ensure solid color is applied */
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+.status-text-scan {
+    color: var(--prof-text-light) !important;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+/* Loading spinner overlay */
+.loading-overlay-scan {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border-radius: 24px;
+    color: #fff;
+}
+
+
+/* --- Orbit Animation --- */
+.orbit-animation-scan {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.orbit-ring-scan {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba(127, 140, 141, 0.5);
+    width: 100%;
+    height: 100%;
+    animation: orbit 4s linear infinite;
+    opacity: 0.7;
+}
+
+.orbit-ring-scan.ring-1-scan {
+    animation-delay: 0s;
+}
+
+.orbit-ring-scan.ring-2-scan {
+    animation-delay: 1s;
+    border-color: rgba(127, 140, 141, 0.4);
+}
+
+.orbit-ring-scan.ring-3-scan {
+    animation-delay: 2s;
+    border-color: rgba(127, 140, 141, 0.3);
+}
+
+
+/* --- Action Buttons (Refactored for less repetition) --- */
+.new-register-btn-scan,
+.check-balance-btn-scan {
+    background: #d22330 !important;
+    border-radius: 12px !important;
+    padding: 1rem 3.5rem !important;
+    font-size: 1.15rem !important;
+    font-weight: 600 !important;
+    color: #fdfdfd !important;
+    text-transform: none !important;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease !important;
+}
+
+.new-register-btn-scan:hover,
+.check-balance-btn-scan:hover {
+    background: #d22330 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+.btn-text-scan,
+.btn-text-btn-scan {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-glow-scan,
+.btn-glow-btn-scan {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.new-register-btn-scan:hover .btn-glow-scan,
+.check-balance-btn-scan:hover .btn-glow-btn-scan {
+    left: 100%;
+}
+
+.back-btn-scan {
+    position: absolute !important;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    background: #d22330 !important;
+    color: #ffffff !important;
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 8px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.back-btn-scan:hover {
+    background: #d22330 !important;
+    box-shadow: 0 8px 20px rgba(100, 108, 255, 0.5) !important;
+    transform: translateY(-2px);
+}
+
+
+/* --- Dialog (Popup) Styles --- */
+.details-dialog-scan {
+    border-radius: 16px !important;
+    background: #2E2E2E !important;
+    color: #E0E0E0 !important;
+    border: 1px solid #6E6E6E !important;
+    width: 600px !important;
+    height: auto !important; /* Changed to auto for better content fitting */
+    max-height: 90vh !important;
+    padding: 1.5rem !important;
+}
+
+.dialog-title-scan {
+    font-weight: 600 !important;
+    text-align: center;
+    font-size: 1.4rem;
+    border-bottom: 1px solid #6E6E6E;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.details-container-scan {
+    padding: 1rem 0;
+    margin-bottom: 1.5rem;
+}
+
+.detail-row-scan {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    font-size: 1.15rem;
+}
+
+.detail-label-scan {
+    font-weight: 500 !important;
+    color: #B0B0B0 !important;
+}
+
+.detail-value-scan {
+    font-weight: 600 !important;
+    color: #E0E0E0 !important;
+}
+
+.dialog-confirm-text-scan {
+    text-align: center;
+    color: #B0B0B0 !important;
+    font-size: 1rem !important;
+    margin-bottom: 1rem;
+}
+
+.dialog-btn-cancel-scan,
+.dialog-btn-confirm-scan {
+    text-transform: none !important;
+    font-weight: 600 !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-size: 1rem !important;
+}
+
+.dialog-btn-cancel-scan {
+    color: #FF7F7F !important;
+    border: 1px solid #FF7F7F !important;
+}
+
+.dialog-btn-confirm-scan {
+    background: #6fd63f !important;
+    color: #FFFFFF !important;
+}
+
+/* --- NEW STYLES FOR TRANSACTION HISTORY --- */
+
+/* Make the dialog wider to fit new content */
+.details-dialog-scan {
+    padding: 16px;
+}
+
+.history-section-scan {
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+/* Container for filter dropdown and date picker */
+.filter-controls-scan {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 10px;
+    background-color: #000000;
+    border-radius: 8px;
+}
+
+/* Container for the scrollable list of transactions */
+.transaction-list-container-scan {
+    max-height: 300px; /* Adjust as needed */
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0 8px;
+}
+
+/* Individual transaction item */
+.transaction-item-scan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.transaction-details-right-scan {
+    text-align: right;
+    margin-left: 16px;
+    flex-shrink: 0; /* Prevents this box from shrinking */
+}
+
+/* Styling for the transaction amount */
+.transaction-amount-scan {
+    font-weight: bold;
+}
+
+.transaction-amount-scan.topup {
+    color: #4caf50; /* Green for top-ups */
+}
+
+.transaction-amount-scan.purchase {
+    color: #f44336; /* Red for purchases */
+}
+
+/* Modify existing dialog confirmation text */
+.dialog-confirm-text-scan {
+    margin-top: 24px !important; /* Add space above the text */
+    text-align: center;
+    font-style: italic;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.15);
+        opacity: 0.8;
+    }
+}
+
+@keyframes orbit {
+    0% {
+        transform: rotate(0deg) scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: rotate(360deg) scale(1.3);
+        opacity: 0.7;
+    }
+}
+
+
+/* --- Responsive Styles --- */
+@media (max-width: 768px) {
+    .scanning-content-scan {
+        padding: 1rem;
+    }
+
+    .rfid-card-scan {
+        min-width: 300px !important;
+        padding: 2rem !important;
+    }
+
+    .scan-circle-scan {
+        width: 120px;
+        height: 120px;
+    }
+
+    .contactless-icon-scan {
+        font-size: 3.5rem !important;
+    }
+
+    .rfid-text-scan {
+        font-size: 1.5rem !important;
+    }
+
+    .new-register-btn-scan,
+    .check-balance-btn-scan {
+        padding: 0.8rem 2.5rem !important;
+        font-size: 1rem !important;
+    }
+}

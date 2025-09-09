@@ -1,0 +1,212 @@
+/* ==========================================================================
+   AccountPage.css - Styles for the RFID Account Payment Screen
+   ========================================================================== */
+
+/* --- THEME COLOR VARIABLES --- */
+:root {
+    --prof-bg: #F4F6F8;             /* Light, clean background for the page */
+    --prof-card-bg: #FFFFFF;        /* Crisp white for the card */
+    --prof-primary-blue: #0D47A1;    /* Deep, trustworthy corporate blue */
+    --prof-secondary-blue: #42A5F5;  /* A lighter, more vibrant blue for highlights */
+    --prof-text-dark: #212121;      /* Very dark gray for high-contrast text */
+    --prof-text-light: #616161;     /* Medium gray for secondary/status text */
+}
+
+/* --- PAGE LAYOUT --- */
+.account-page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color:#333333;
+    overflow: hidden; /* Prevents scrollbars */
+}
+
+.account-page-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem; /* Space between card and total amount */
+    padding: 2rem;
+}
+
+/* --- RFID CARD STYLES --- */
+.rfid-card-account {
+    background: var(--prof-card-bg) !important;
+    border-radius: 24px !important;
+    padding: 3rem !important;
+    min-width: 380px;
+    max-width: 420px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #E0E0E0 !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rfid-card-account:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12) !important;
+}
+
+.rfid-card-content-account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.scan-circle-account {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, var(--prof-secondary-blue), var(--prof-primary-blue));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(13, 71, 161, 0.4);
+}
+
+.contactless-icon-account {
+    font-size: 4.5rem !important;
+    color: #FFFFFF !important;
+    z-index: 2;
+    animation: pulse 2.5s ease-in-out infinite;
+}
+
+/* --- TEXT STYLES --- */
+.rfid-text-account {
+    font-size: 1.8rem !important;
+    font-weight: 600 !important;
+    color: var(--prof-text-dark) !important;
+    text-align: center;
+    /* Ensure no unwanted text effects are inherited */
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+.status-text-account {
+    color: var(--prof-text-light) !important;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    min-height: 20px; /* Prevents layout shift when text changes */
+}
+
+/* --- TOTAL AMOUNT DISPLAY --- */
+.total-amount-display-account {
+    background-color: var(--prof-card-bg);
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: var(--prof-text-dark);
+}
+
+/* --- FOOTER AND CANCEL BUTTON --- */
+.account-page-footer {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    
+}
+
+.account-page-cancel-btn {
+    padding: 12px 24px !important;
+    font-size: 1rem !important;
+    color: #FFFFFF;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    background-color: #d22330;
+}
+
+/* --- MODAL / POPUP STYLES --- */
+.popup-box-account {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 450px;
+    background-color: var(--prof-card-bg);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 2.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border: none;
+    outline: none;
+}
+
+.popup-text-account {
+    font-size: 1.25rem !important;
+    color: var(--prof-text-dark);
+    line-height: 1.6;
+}
+
+/* --- LOADING SPINNER OVERLAY --- */
+.loading-overlay-account {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.85); /* Slightly more opaque for focus */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    border-radius: 24px;
+    color: var(--prof-primary-blue);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes orbit {
+    from { transform: scale(1); opacity: 0.8; }
+    to { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.orbit-animation-account {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.orbit-ring-account {
+    position: absolute;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    animation: orbit 4s linear infinite;
+}
+
+/* Rings use the theme's colors for a cohesive look */
+.orbit-ring-account.ring-1-account {
+    animation-delay: 0s;
+    border: 2px solid rgba(13, 71, 161, 0.3); /* Primary Blue */
+}
+
+.orbit-ring-account.ring-2-account {
+    animation-delay: 1.3s;
+    border: 1px dashed rgba(66, 165, 245, 0.5); /* Secondary Blue */
+}
+
+.orbit-ring-account.ring-3-account {
+    animation-delay: 2.6s;
+    border: 2px solid rgba(13, 71, 161, 0.2); /* Primary Blue */
+}

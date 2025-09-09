@@ -1,0 +1,395 @@
+/* PayingPage - Compact Professional Design */
+.paying-page-new-upi {
+  min-height: 100vh;
+  background:#3E3E3E;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Section -- UPDATED FOR GLASSY EFFECT -- */
+.header-section-upi {
+  width: 100%;
+  background-color:#4a4a4a; 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 6);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  /* transition: opacity 0.3s ease; */
+}
+
+.header-section-upi.hidden-upi {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.header-title-upi {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+.header-logo-upi {
+  height: 68px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Main Content Section -- THIS IS WHERE THE CENTERING LOGIC IS APPLIED -- */
+.content-section-upi {
+  flex: 1; /* This makes the section fill the available vertical space */
+  display: flex; /* This enables flexbox layout */
+  align-items: center; /* This vertically centers the child content */
+  justify-content: center; /* This horizontally centers the child content */
+  padding: 1.5rem;
+}
+
+/* ===== THIS IS THE PRIMARY UPDATED SECTION ===== */
+.payment-card-upi {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Amount Area - Moved to top */
+.amount-area-upi {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.amount-label-upi {
+  font-size: 0.9rem;
+  color: #666666;
+  margin-bottom: 0.5rem;
+}
+
+.amount-value-upi {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000000;
+}
+
+/* Timer Area - Compact */
+.timer-area-upi {
+  /* No specific styles, relies on parent flex gap */
+}
+
+.timer-label-upi {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #666666;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.timer-value-upi {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #d22330;
+  font-family: "Courier New", monospace;
+}
+
+/* QR Code Area - Larger and Below Timer */
+.qr-area-upi {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.qr-loading{
+
+  color: #75d857;
+  
+
+}
+.qr-container-upi {
+  width: 280px;
+  height: 280px;
+  margin: 0 auto 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.qr-code-image-upi {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.qr-text-upi {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Payment Apps Area - Compact */
+.apps-area-upi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: auto; 
+}
+
+.app-item-upi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.app-item-upi:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-2px);
+}
+
+.app-icon-upi {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.app-name-upi {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #333333;
+}
+
+/* Bottom Buttons Section */
+.button-section-upi {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.action-btn-upi {
+  background-color: #d22330;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.8rem;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(210, 35, 48, 0.3);
+}
+
+.action-btn-upi:hover {
+  background-color: #b91c28;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(210, 35, 48, 0.4);
+}
+
+.action-btn-upi:focus {
+  outline: 2px solid #d22330;
+  outline-offset: 2px;
+}
+
+/* Error State */
+.error-state-upi {
+  background-color: #f8d7da !important;
+  border: 2px solid #f5c6cb !important;
+}
+.error-icon-upi { font-size: 3rem; margin-bottom: 1rem; }
+.error-title-upi { font-size: 1.3rem; font-weight: bold; color: #721c24; margin: 0 0 0.5rem 0; }
+.error-message-upi { font-size: 0.9rem; color: #721c24; margin: 0; }
+
+/* Success Overlay */
+.success-overlay-upi {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(45, 168, 51, 1);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-in-out;
+}
+.success-overlay-upi.visible-upi { opacity: 1; pointer-events: auto; }
+.success-animation-upi { margin-bottom: 1rem; }
+.success-text-upi { font-size: 1.3rem; font-weight: bold; color: #ffffff; text-align: center; }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header-title-upi { font-size: 1.5rem; }
+  .payment-card-upi { padding: 1.5rem 1rem; max-width: 350px; }
+  .qr-container-upi { width: 240px; height: 240px; }
+  .timer-value-upi { font-size: 2rem; }
+  .amount-value-upi { font-size: 1.5rem; }
+  .apps-area-upi { gap: 0.8rem; }
+  .app-icon-upi { width: 32px; height: 32px; }
+}
+
+@media (max-width: 576px) {
+  .content-section-upi { padding: 1rem; }
+  .payment-card-upi { padding: 1.5rem; max-width: none; }
+  .qr-container-upi { width: 100%; max-width: 250px; height: auto; aspect-ratio: 1/1; }
+   
+  .timer-value-upi { font-size: 1.8rem; }
+  .amount-value-upi { font-size: 1.3rem; }
+  .button-section-upi {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1rem;
+    align-items: center;
+  }
+  .action-btn-upi { width: 100%; max-width: 320px; }
+  .apps-area-upi { gap: 0.6rem; }
+  .app-icon-upi { width: 28px; height: 28px; }
+  .app-name-upi { font-size: 0.6rem; }
+}
+
+/* Accessibility */
+@media (prefers-contrast: high) {
+  .payment-card-upi { border: 2px solid #000000; }
+  .qr-container-upi { border: 2px solid #000000; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .action-btn-upi, .app-item-upi { transition: none; }
+  .payment-card-upi { animation: none; }
+}
+
+/* Touch Friendly */
+@media (pointer: coarse) {
+  .action-btn-upi { min-height: 44px; padding: 1rem 2rem; }
+  .app-item-upi { min-width: 44px; min-height: 44px; padding: 0.8rem; }
+}
+
+/* --- ADD THESE NEW STYLES TO PayingPage.css --- */
+
+/* Styles for the new Payment Failed screen */
+.payment-failed-container-upi {
+  background: linear-gradient(180deg, #2d2d2d 0%, #1a1a1a 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.payment-failed-card-upi {
+  background-color: #383838;
+  border-radius: 24px;
+  padding: 30px;
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  border: 1px solid #4a4a4a;
+}
+
+.failed-animation-container-upi {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 15px auto;
+}
+
+.failed-title-upi {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ff5a5a; /* A distinct error color */
+  margin: 0;
+}
+
+.failed-message-upi {
+  font-size: 1.1rem;
+  color: #dcdcdc;
+  margin-top: 10px;
+  line-height: 1.5;
+  min-height: 40px; /* Reserve space for message */
+}
+
+.failed-footer-upi {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 30px;
+  width: 100%;
+  max-width: 450px;
+}
+
+.failed-action-btn-upi {
+  flex-grow: 1;
+  background-color: #4a4a4a;
+  color: #fff;
+  border: 1px solid #606060;
+  border-radius: 12px;
+  padding: 18px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.failed-action-btn-upi:hover {
+  background-color: #5a5a5a;
+  border-color: #777;
+}
+
+.failed-action-btn-upi.primary-upi {
+  background-color: #c02727; /* A primary action color */
+  /* border-color: #007aff; */
+}
+
+.failed-action-btn-upi.primary-upi:hover {
+  background-color: #c02727;
+  border-color: #0056b3;
+}
+
+/* Original Transaction ID styling update */
+.transaction-id-upi {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+}

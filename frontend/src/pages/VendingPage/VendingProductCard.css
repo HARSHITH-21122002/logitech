@@ -1,0 +1,164 @@
+/* ========================================= */
+/* === THE FIX FOR FIXED SIZE IS HERE      === */
+/* ========================================= */
+
+.vending-card-v2 {
+  /* --- ACTION 1: Set the exact fixed dimensions --- */
+  width: 143px;
+  height: 247px;
+  border-radius: 24px;
+
+  /* --- ACTION 2: Use Flexbox to manage internal layout --- */
+  display: flex;
+  flex-direction: column;
+
+  /* --- (Other base styles are fine) --- */
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent; /* Prepare for status borders */
+}
+
+.vending-card-v2-image-container {
+  /* --- ACTION 3: Make the image container flexible --- */
+  flex-grow: 1; /* This allows the image area to take up available space */
+  position: relative;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Add padding inside the container */
+  padding: 1rem;
+}
+
+.vending-card-v2-image {
+  /* --- ACTION 4: Ensure the image scales within its flexible container --- */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: filter 0.3s ease;
+}
+
+.vending-card-v2-details {
+  /* --- ACTION 5: Set a fixed, non-growing height for the details area --- */
+  flex-shrink: 0; /* Prevents this section from shrinking */
+  padding: 1.25rem 1rem;
+  text-align: center;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* ========================================= */
+/* === END OF FIX === */
+/* ========================================= */
+
+
+.vending-card-v2-name {
+  font-size: 1.1rem; /* Slightly larger for the new size */
+  font-weight: 600;
+  color: #34495e;
+  margin: 0 0 0.3rem;
+  /* Add line-clamping for very long names */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vending-card-v2-qty {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+/* --- Status Overlay & Icons (Unchanged) --- */
+.status-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease, background-color 0.4s ease;
+  backdrop-filter: blur(2px);
+  border-radius: 22px 22px 0 0; /* Match the parent corner radius */
+}
+
+.status-icon {
+  color: white;
+  font-size: 3rem; /* Larger icon for the bigger card */
+}
+
+.icon-wrapper {
+  width: 80px; /* Larger wrapper */
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px S10px rgba(0, 0, 0, 0.2);
+}
+
+.status-text {
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.status-text.small {
+  font-size: 1rem;
+}
+
+/* --- State Styles (Unchanged) --- */
+.vending-card-v2.vending {
+  border-color: #3498db;
+}
+.vending-card-v2.vending .status-overlay {
+  opacity: 1;
+  background-color: rgba(52, 152, 219, 0.7);
+}
+.status-icon.spinner {
+  color: white; /* Changed back to white for better contrast on blue */
+  font-size: 3.5rem;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.vending-card-v2.success {
+  border-color: #2ecc71;
+}
+.vending-card-v2.success .vending-card-v2-image {
+  filter: grayscale(50%) brightness(1.1);
+}
+.vending-card-v2.success .status-overlay {
+  opacity: 1;
+  background-color: rgba(46, 204, 113, 0.6);
+}
+.vending-card-v2.success .icon-wrapper {
+  background-color: #27ae60;
+}
+
+.vending-card-v2.failed {
+  border-color: #e74c3c;
+}
+.vending-card-v2.failed .vending-card-v2-image {
+  filter: grayscale(80%) brightness(0.9);
+}
+.vending-card-v2.failed .status-overlay {
+  opacity: 1;
+  background-color: rgba(231, 76, 60, 0.7);
+}
+.vending-card-v2.failed .icon-wrapper {
+  background-color: #c0392b;
+}

@@ -1,0 +1,54 @@
+.motor-card {
+  aspect-ratio: 1;
+  background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 60px;
+  color: #ffffff;
+}
+
+.motor-card--active {
+  background: linear-gradient(145deg, #ffffff 0%, #e0e0e0 100%);
+  border-color: #ffffff;
+  color: #232526;
+}
+
+.motor-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.motor-card__content {
+  text-align: center;
+}
+
+.motor-card__id {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.motor-card__count {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .motor-card {
+    min-height: 50px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .motor-card {
+    min-height: 40px;
+    font-size: 10px;
+  }
+}

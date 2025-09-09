@@ -1,0 +1,295 @@
+/* ===== REPORT PAGE REDESIGN ===== */
+.report-page-redesign {
+  min-height: 100vh;
+  background-color: #3E3E3E;
+  font-family: "Roboto", "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== HEADER SECTION ===== */
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #4a4a4a;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  /* --- FIX: Set as the positioning parent for the title --- */
+  position: relative; 
+}
+
+.bvc-title {
+  /* --- FIX: Absolute positioning for perfect centering --- */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  /* Your existing styles */
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.company-logo {
+  /* This will be pushed to the right by the header's justify-content */
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  margin-left: auto; /* Ensures it stays to the right */
+}
+
+/* ===== MAIN ACTION BUTTONS - CENTER ALIGNED ===== */
+.report-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.action-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.action-btn {
+  background-color: #d22330;
+  color: #ffffff;
+  border: none;
+  border-radius: 25px;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  min-height: 60px;
+  box-shadow: 0 4px 12px rgba(210, 35, 48, 0.3);
+}
+
+.action-btn:hover {
+  background-color: #b91c28;
+  transform: translateY(-2px);
+  /* box-shadow: 0 6px 16px rgba(210, 35, 48, 0.4); */
+}
+
+/* ===== BOTTOM SECTION ===== */
+.report-footer {
+  display: flex;
+  justify-content: flex-start;
+  padding: 1.5rem 2rem 2rem 2rem;
+}
+
+.back-btn {
+  background-color: #b91c28;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.back-btn:hover {
+  background-color: #5a6268;
+}
+
+/* ===== POPUP STYLES ===== */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.popup-container {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 500px; /* A good default max-width */
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.live-report-popup {
+  max-width: 400px;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.popup-header h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.popup-content, .live-report-content {
+  padding: 1.5rem;
+  flex-grow: 1; /* Allows content to fill space */
+}
+
+/* ===== DATE & FORM STYLES ===== */
+.date-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.date-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.date-input {
+  padding: 0.875rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #fff;
+  min-height: 48px;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #d22330;
+  box-shadow: 0 0 0 2px rgba(210, 35, 48, 0.2);
+}
+
+/* ===== POPUP BUTTONS ===== */
+.popup-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.popup-action-btn {
+  background-color: #d22330;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  min-height: 48px;
+}
+
+.popup-action-btn:hover {
+  background-color: #b91c28;
+}
+
+.popup-action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Live Report Specifics */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+.transaction-list {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+.transaction-item:last-child {
+  border-bottom: none;
+}
+.report-data-display h4 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ===== RESPONSIVE BEHAVIOR ===== */
+@media (max-width: 480px) {
+  .report-header {
+    padding: 1rem;
+  }
+  /* --- FIX: Handle mobile header centering --- */
+  .bvc-title {
+    position: static; /* Revert to normal flow */
+    transform: none;   /* Remove transform */
+    width: 100%;       /* Allow text-align to work */
+    text-align: center;
+    font-size: 2rem;
+  }
+  .company-logo {
+    display: none; /* Hide logo on very small screens to avoid clutter */
+  }
+  .report-main {
+    padding: 1rem;
+  }
+  .action-btn {
+    font-size: 1.1rem;
+  }
+}

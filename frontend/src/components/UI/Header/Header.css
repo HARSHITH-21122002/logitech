@@ -1,0 +1,171 @@
+.header-section-components {
+  /* Positioning: Sticks to the top-left of the viewport */
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  
+  /* Flexbox Layout: For arranging logo, title, and spacer */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  /* Enhanced spacing and padding */
+  padding: 0.75rem 2rem;
+  min-height: 80px;
+  
+  /* Modern frosted glass effect with gradient */
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.08) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  
+  /* Enhanced border and shadow */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  
+  /* Smooth transitions */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover effect for interactive feel */
+.header-section-components:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.2) 0%, 
+    rgba(255, 255, 255, 0.12) 100%);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.header-section-components.hidden-upi {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.3s ease-in-out;
+}
+
+.header-title-components {
+  /* Perfect centering with flex */
+  flex: 1;
+  margin: 0;
+  
+  /* Enhanced typography */
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: -0.025em;
+  
+  /* Text effects */
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.6);
+  
+  /* Subtle animation on hover */
+  transition: all 0.3s ease;
+}
+
+.header-title-components:hover {
+  transform: translateY(-1px);
+  text-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.header-logo-components {
+  /* Enhanced logo sizing */
+  height: 75px;
+  width: 60px;
+  object-fit: contain;
+  
+  /* Professional styling */
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Subtle border for definition */
+  border-radius: 8px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.header-logo-components:hover {
+  transform: translateY(-2px) scale(1.05);
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.4));
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+  .header-section-components {
+    padding: 0.5rem 1rem;
+    min-height: 70px;
+  }
+  
+  .header-title-components {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+  
+  .header-logo-components {
+    height: 60px;
+    width: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-section-components {
+    padding: 0.5rem 0.75rem;
+    min-height: 65px;
+  }
+  
+  .header-title-components {
+    font-size: 1.25rem;
+  }
+  
+  .header-logo-components {
+    height: 50px;
+    width: 38px;
+  }
+}
+
+/* Dark theme variant (optional) */
+.header-section-components.dark-theme {
+  background: linear-gradient(135deg, 
+    rgba(30, 30, 30, 0.95) 0%, 
+    rgba(20, 20, 20, 0.9) 100%);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.header-section-components.dark-theme:hover {
+  background: linear-gradient(135deg, 
+    rgba(40, 40, 40, 0.95) 0%, 
+    rgba(30, 30, 30, 0.9) 100%);
+}
+
+/* Light theme variant (optional) */
+.header-section-components.light-theme {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(250, 250, 250, 0.9) 100%);
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.header-section-components.light-theme .header-title-components {
+  color: #1a1a1a;
+  text-shadow: 
+    0 1px 3px rgba(255, 255, 255, 0.8),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+}

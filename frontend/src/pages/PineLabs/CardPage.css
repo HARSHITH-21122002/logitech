@@ -1,0 +1,171 @@
+/* --- Main Page Layout --- */
+.card-page-new-cardpay {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #1a1a1a; /* Dark background */
+  color: white;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* --- Fullscreen Success Overlay --- */
+.success-overlay-cardpay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(26, 26, 26, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.success-overlay-cardpay.visible-cardpay {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.success-animation-cardpay {
+  width: 250px;
+  height: 250px;
+}
+
+.success-text-cardpay {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #75d857; /* Success green */
+  margin-top: 20px;
+}
+
+/* --- Main Content Area --- */
+.content-section-cardpay {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.payment-card-cardpay {
+  width: 95%;
+  max-width: 500px;
+  background: linear-gradient(145deg, #2e2e2e, #1e1e1e);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5), -10px -10px 30px rgba(45, 45, 45, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* --- Sections within the Card --- */
+.amount-area-cardpay, .timer-area-cardpay {
+  text-align: center;
+}
+
+.amount-label-cardpay, .timer-label-cardpay {
+  font-size: 1rem;
+  color: #a0a0a0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.amount-value-cardpay {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.timer-value-cardpay {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #75d857; /* Green timer */
+  transition: color 0.3s;
+}
+
+.timer-value-cardpay.timer-warning {
+  color: #ffc107; /* Warning yellow */
+}
+
+/* --- Central Instruction Area (Replaces QR) --- */
+.instruction-area-cardpay {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  min-height: 200px;
+}
+
+.instruction-icon-cardpay {
+  font-size: 60px !important;
+  color: #3498db;
+}
+
+.instruction-text-cardpay {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  font-weight: 400;
+}
+
+/* --- App Logos --- */
+.apps-area-cardpay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.app-item-cardpay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-icon-cardpay {
+  height: 35px;
+  filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+.app-name-cardpay {
+  font-size: 0.8rem;
+  color: #a0a0a0;
+}
+
+/* --- Footer and Buttons --- */
+.button-section-cardpay {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.action-btn-cardpay {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.action-btn-cardpay:hover {
+  background-color: #d32f2f;
+  transform: translateY(-2px);
+}

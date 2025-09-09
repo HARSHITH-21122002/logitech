@@ -1,0 +1,259 @@
+/* ===== SELECT PAYMENT PAGE NEW DESIGN ===== */
+.add-selectpayment-select-payment-page {
+  min-height: 100vh;
+  background: #3E3E3E;
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ===== STICKY HEADER ===== */
+
+/* ===== MAIN CONTENT AREA ===== */
+.add-selectpayment-payment-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem; /* Increased padding */
+  padding-bottom: 140px; /* More space for the fixed bottom buttons */
+}
+
+.add-selectpayment-cards-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem; /* Adjusted gap for 3 cards */
+  width: 100%;
+  max-width: 1200px; /* Increased max-width to accommodate 3 cards */
+  margin-bottom: 3rem; /* Increased margin */
+}
+
+/* ===== PAYMENT CARDS - ENLARGED ===== */
+.add-selectpayment-payment-card {
+  flex: 1;
+  max-width: 380px; /* Adjusted for 3 cards */
+  background-color: #ffffff;
+  border-radius: 24px; /* Softer corners for a larger card */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem 2rem; /* Increased padding */
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 4px solid transparent; /* Slightly thicker border for selection */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.add-selectpayment-payment-card:hover {
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.add-selectpayment-payment-card.add-selectpayment-selected {
+  border-color: #4caf50;
+  box-shadow: 0 10px 28px rgba(76, 175, 80, 0.25);
+}
+
+/* ===== SPECIFIC CARD STYLES ===== */
+.add-selectpayment-upi-card.add-selectpayment-selected {
+  border-color: #4caf50;
+  box-shadow: 0 10px 28px rgba(76, 175, 80, 0.25);
+}
+
+.add-selectpayment-card-payment-card.add-selectpayment-selected {
+  border-color: #4caf50;
+  box-shadow: 0 10px 28px rgba(76, 175, 80, 0.25);
+}
+
+.add-selectpayment-account-card.add-selectpayment-selected {
+  border-color: #4caf50;
+  box-shadow: 0 10px 28px rgba(76, 175, 80, 0.25);
+}
+
+.add-selectpayment-card-title {
+  font-size: 1.25rem; /* Increased font size */
+  font-weight: 600;
+  color: #555555;
+  margin: 0 0 2rem 0;
+}
+
+.add-selectpayment-card-illustration {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.add-selectpayment-illustration-image {
+  width: 160px; /* --- Increased Size --- */
+  height: 160px; /* --- Increased Size --- */
+  object-fit: contain;
+}
+
+.add-selectpayment-card-caption {
+  font-size: 1rem; /* Increased font size */
+  color: #666666;
+  margin: 0 0 2rem 0;
+  line-height: 1.5;
+}
+
+.add-selectpayment-app-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px; /* Increased gap */
+  margin-top: auto;
+}
+
+.add-selectpayment-app-logo {
+  width: 40px; /* --- Increased Size --- */
+  height: 40px; /* --- Increased Size --- */
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== TOTAL AMOUNT ===== */
+.add-selectpayment-total-amount-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.add-selectpayment-total-amount-pill {
+  background-color: #12b751;
+  border-radius: 30px; /* Larger radius for a bigger pill */
+  padding: 16px 32px; /* Increased padding */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.add-selectpayment-total-text {
+  font-weight: bold;
+  color: #ffffff; /* White text looks better on the green */
+  font-size: 1.5rem; /* Increased font size */
+}
+
+/* ===== BOTTOM BUTTONS ===== */
+.add-selectpayment-bottom-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 2rem; /* Increased padding */
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.add-selectpayment-bottom-btn {
+  background-color: #d22330;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px; /* Softer radius */
+  padding: 1rem 2.5rem; /* Increased padding */
+  font-weight: bold;
+  font-size: 1.2rem; /* Increased font size */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 150px; /* Increased min-width */
+  min-height: 56px; /* Increased min-height for better touch targets */
+  box-shadow: 0 4px 12px rgba(210, 35, 48, 0.3);
+}
+
+.add-selectpayment-bottom-btn:hover {
+  background-color: #b91c28;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(210, 35, 48, 0.4);
+}
+
+/* ===== RESPONSIVE DESIGN (FOR SMALLER SCREENS) ===== */
+@media (max-width: 1024px) {
+  .add-selectpayment-cards-container {
+    gap: 1.5rem;
+    max-width: 900px;
+  }
+  
+  .add-selectpayment-payment-card {
+    max-width: 320px;
+    padding: 2rem 1.5rem;
+  }
+  
+  .add-selectpayment-illustration-image {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .add-selectpayment-header-title {
+    font-size: 1.75rem;
+  }
+  
+  .add-selectpayment-cards-container {
+    flex-direction: column;
+    gap: 1.5rem; /* Increased gap */
+    max-width: 450px; /* Allow cards to be a bit wider on mobile */
+    align-items: center;
+  }
+  
+  .add-selectpayment-payment-card {
+    max-width: 100%;
+    width: 100%;
+    padding: 2rem 1.5rem; /* Increased padding */
+  }
+  
+  .add-selectpayment-illustration-image {
+    width: 120px; /* Increased Size */
+    height: 120px; /* Increased Size */
+  }
+  
+  .add-selectpayment-card-caption {
+    font-size: 0.9rem; /* Increased font size */
+  }
+  
+  .add-selectpayment-app-logo {
+    width: 32px; /* Increased Size */
+    height: 32px; /* Increased Size */
+  }
+  
+  .add-selectpayment-payment-content {
+    padding: 1.5rem;
+    padding-bottom: 120px;
+  }
+  
+  .add-selectpayment-bottom-btn {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-selectpayment-payment-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .add-selectpayment-card-title {
+    font-size: 1.1rem;
+  }
+  
+  .add-selectpayment-illustration-image {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .add-selectpayment-app-logo {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .add-selectpayment-total-text {
+    font-size: 1.3rem;
+  }
+}

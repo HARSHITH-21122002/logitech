@@ -1,0 +1,22 @@
+.motor-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8px;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .motor-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .motor-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    padding: 10px;
+  }
+}

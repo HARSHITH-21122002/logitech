@@ -1,0 +1,13 @@
+flask
+flask-cors
+flask-sqlalchemy
+flask-bcrypt
+flask-jwt-extended
+python-dotenv
+SQLAlchemy
+pymysql          
+pymodbus
+aiohttp
+reportlab        
+requests
+pyserial         
