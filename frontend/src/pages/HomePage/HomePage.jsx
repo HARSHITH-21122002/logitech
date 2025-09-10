@@ -140,7 +140,15 @@ useEffect(() => {
   const handlePressEnd = () => clearTimeout(longPressTimer.current);
 
   const handleKeyClick = (key) => { const targetStateSetter = activeInput === 'username' ? setUsername : setPassword; if (key === 'Backspace') { targetStateSetter((prev) => prev.slice(0, -1)); } else if (key === 'CapsLock') { setIsCapsLock(!isCapsLock); setIsShift(false); } else if (key === 'Shift') { setIsShift(!isShift); } else if (key === 'Symbols') { setShowSymbols(!showSymbols); } else if (key === 'Space') { targetStateSetter((prev) => prev + ' '); } else if (key === 'Enter') { if (username && password) { const payload = { username, password }; operatorloginApi.loginOperator(payload).then((res) => { if (res.success) { toast.success("Login Successful!"); setTimeout(() => { navigate("/operator"); handleAuthModalClose(); }, 1500); } else { toast.error("Invalid username or password."); } }).catch((err) => { console.error("Login failed:", err); toast.error("Login failed. Please try again."); }); } else { toast.warn("Please enter both username and password."); } } else { const char = isShift || isCapsLock ? key.toUpperCase() : key.toLowerCase(); targetStateSetter((prev) => prev + char); if (isShift) setIsShift(false); } };
-  const getKeyboards = () => { const base = [ ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='], ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'], ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'"], ['z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/'] ]; const symbols = [ ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+'], ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|'], ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"'], ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?'] ]; return showSymbols ? symbols : base; };
+  const getKeyboards = () => { const base = [ 
+    ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='], 
+    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'], 
+    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'"], 
+    ['z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/'] ]; 
+    const symbols = [ ['~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+'], 
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '|'], 
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"'], 
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?'] ]; return showSymbols ? symbols : base; };
   const keyboardLayout = getKeyboards();
 
 return (

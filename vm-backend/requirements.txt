@@ -11,3 +11,5 @@ aiohttp
 reportlab        
 requests
 pyserial         
+pywin32
+pytz

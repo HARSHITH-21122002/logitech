@@ -512,29 +512,31 @@
 .keyboard-containerHome {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
   user-select: none;
   margin-top: auto;
-  padding: 12px;
+  padding: 8px;
   background: #2c3e50;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25),
     inset 0 1px 2px rgba(255, 255, 255, 0.1);
 }
+
 .keyboard-rowHome {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 5px;
 }
+
 .keyboard-keyHome {
   flex: 1;
-  min-width: 48px;
-  height: 52px;
+  min-width: 36px;
+  height: 40px;
   border: none;
-  border-radius: 8px;
-  background-color: #f0f2f5;
-  color: #3b4a6b;
-  font-size: 1.1rem;
+  border-radius: 6px;
+  background-color: #dd2330;
+  color: #ffffff;
+  font-size: 0.95rem;
   font-weight: 600;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   cursor: pointer;
@@ -542,100 +544,147 @@
   align-items: center;
   justify-content: center;
   transition: all 0.1s ease-out;
-  border-bottom: 4px solid #aeb8c4;
+  border-bottom: 3px solid #b91c28;
   position: relative;
 }
+
 .keyboard-keyHome:hover {
-  background-color: #ffffff;
-  transform: translateY(-2px);
-  border-bottom-width: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #e63946;
+  transform: translateY(-1px);
+  border-bottom-width: 4px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
+
 .keyboard-keyHome:active {
   transform: translateY(1px);
-  border-bottom-width: 2px;
-  background-color: #e8ebf0;
+  border-bottom-width: 1px;
+  background-color: #c21e2a;
   box-shadow: none;
   transition-duration: 0.05s;
 }
+
 .function-keyHome {
-  background-color: #cad1db;
-  border-bottom-color: #9aa4b3;
-  color: #4a5a7b;
-  font-size: 0.9rem;
+  background-color: #a91e28;
+  border-bottom-color: #8a1821;
+  color: #ffffff;
+  font-size: 0.8rem;
 }
+
 .function-keyHome:hover {
-  background-color: #d8dde6;
+  background-color: #b92530;
 }
+
 .function-keyHome:active {
-  background-color: #b8c0cf;
+  background-color: #951a24;
 }
+
 .space-barHome {
   flex-grow: 5;
 }
+
 .enter-keyHome {
   flex-grow: 1.75;
-  background-color: #3498db;
-  border-bottom-color: #2980b9;
+  background-color: #dd2330;
+  border-bottom-color: #b91c28;
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
+
 .enter-keyHome:hover {
-  background-color: #4ca9e8;
+  background-color: #e63946;
 }
+
 .enter-keyHome:active {
-  background-color: #2e88c5;
+  background-color: #c21e2a;
 }
+
 .keyboard-keyHome.activeHome {
-  background-color: #3498db;
-  border-bottom-color: #2980b9;
+  background-color: #e63946;
+  border-bottom-color: #b91c28;
   color: #ffffff;
   transform: translateY(1px);
-  border-bottom-width: 2px;
+  border-bottom-width: 1px;
 }
 
 @media (max-width: 768px) {
   .keyboard-keyHome {
-    min-width: 40px;
-    height: 48px;
-    font-size: 1rem;
-    border-radius: 6px;
-  }
-  .keyboard-containerHome {
-    padding: 10px;
-    gap: 8px;
-  }
-  .keyboard-rowHome {
-    gap: 6px;
-  }
-}
-@media (max-width: 600px) {
-  .keyboard-keyHome {
     min-width: 32px;
-    height: 44px;
+    height: 36px;
     font-size: 0.85rem;
     border-radius: 5px;
   }
-  .function-keyHome {
-    font-size: 0.75rem;
-  }
   .keyboard-containerHome {
-    padding: 8px;
-    gap: 5px;
+    padding: 6px;
+    gap: 4px;
   }
   .keyboard-rowHome {
-    gap: 5px;
+    gap: 4px;
   }
 }
+
+@media (max-width: 600px) {
+  .keyboard-keyHome {
+    min-width: 28px;
+    height: 32px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    border-bottom-width: 2px;
+  }
+  
+  .keyboard-keyHome:hover {
+    border-bottom-width: 3px;
+  }
+  
+  .keyboard-keyHome:active {
+    border-bottom-width: 1px;
+  }
+  
+  .function-keyHome {
+    font-size: 0.65rem;
+  }
+  
+  .keyboard-containerHome {
+    padding: 5px;
+    gap: 3px;
+    border-radius: 10px;
+  }
+  
+  .keyboard-rowHome {
+    gap: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .keyboard-keyHome {
+    min-width: 24px;
+    height: 28px;
+    font-size: 0.7rem;
+    border-radius: 3px;
+  }
+  
+  .function-keyHome {
+    font-size: 0.6rem;
+  }
+  
+  .keyboard-containerHome {
+    padding: 4px;
+    gap: 2px;
+    border-radius: 8px;
+  }
+  
+  .keyboard-rowHome {
+    gap: 2px;
+  }
+}
+
 @media (max-width: 600px) {
   .auth-modal-cardHome {
-    width: 150vw;
-    min-height: 400px;
+    width: 95vw;
+    min-height: 350px;
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   }
 }
-
 /* =================================== */
 /* ===== END OF HomePage.css ===== */
 /* =================================== */

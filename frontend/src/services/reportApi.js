@@ -15,6 +15,17 @@ const reportApi = {
       }
      },
 
+      getreport:async()=>{
+      try{
+        const response = await baseUrl.get("/get/report")
+        return response.data
+      }
+      catch(error)
+      {
+        console.error("Failed to get report")
+        throw error
+      }
+     },
      
 
      updatereport:async(orderNumber,payload)=>{

@@ -18,6 +18,14 @@ def create_product():
         # Directly accept the base64 string if it's present
         image_base64 = data.get("image_path", None)
 
+        # Calculate price with GST added
+        base_price = float(data["price"])
+        gst_rate = float(data["GST"])
+        price_with_gst = base_price + (base_price * gst_rate / 100)
+
+        # Update the price in the data dictionary
+        data["price"] = round(price_with_gst, 2)  # round to 2 decimal places
+
         new_setting = products_bvc(
             categories_id=data.get("categories_id"),
             product_name=data["product_name"],

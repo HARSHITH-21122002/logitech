@@ -10,7 +10,7 @@
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 0.8rem 1rem;
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -21,10 +21,10 @@
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  padding: 1.2rem;
   font-family: "Courier New", monospace;
   color: #000;
-  line-height: 1.5;
+  line-height: 1.3;
   width: 100%;
   max-width: 100%;
 }
@@ -32,31 +32,31 @@
 /* Store Header */
 .store-header {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .store-name {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: bold;
-  margin: 0 0 0.8rem 0;
+  margin: 0 0 0.5rem 0;
   text-transform: uppercase;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 .store-address,
 .store-contact {
-  font-size: 1rem;
-  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  margin: 0.2rem 0;
   color: #333;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 /* Receipt Dividers */
 .receipt-divider {
   font-family: "Courier New", monospace;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   text-align: center;
-  margin: 1rem 0;
+  margin: 0.6rem 0;
   color: #666;
   letter-spacing: 0.5px;
   overflow: hidden;
@@ -64,7 +64,7 @@
 
 .receipt-divider.soft {
   border-top: 1px dashed #ccc;
-  margin: 1rem 0;
+  margin: 0.6rem 0;
   height: 1px;
   line-height: 0;
   letter-spacing: 0;
@@ -73,16 +73,16 @@
 
 /* Transaction Details */
 .transaction-details {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .detail-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  padding: 0.2rem 0;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  padding: 0.1rem 0;
 }
 
 .detail-line span:first-child {
@@ -98,18 +98,18 @@
 
 /* Items Section */
 .items-section {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .items-header {
   font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  margin-bottom: 0.6rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   text-transform: none;
-  padding: 0.4rem 0;
+  padding: 0.2rem 0;
 }
 
 .items-header.success { 
@@ -125,11 +125,11 @@
   display: grid;
   grid-template-columns: 2.5fr 0.8fr 1fr 1.2fr;
   gap: 0.8rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: bold;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.3rem;
   align-items: center;
 }
 
@@ -154,10 +154,10 @@
   display: grid;
   grid-template-columns: 2.5fr 0.8fr 1fr 1.2fr;
   gap: 0.8rem;
-  font-size: 1rem;
-  margin-bottom: 0.6rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
   align-items: center;
-  padding: 0.3rem 0;
+  padding: 0.2rem 0;
 }
 
 .item-line.minimal {
@@ -187,17 +187,17 @@
 
 /* Totals Section */
 .totals {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
+  margin-top: 1rem;
+  padding-top: 0.6rem;
 }
 
 .total-line {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1rem;
-  margin-bottom: 0.6rem;
-  padding: 0.3rem 0.2rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  padding: 0.2rem;
 }
 
 .total-line span:first-child {
@@ -225,9 +225,9 @@
 
 .final-total {
   font-weight: bold;
-  font-size: 1.3rem;
-  margin-top: 1rem;
-  padding: 0.8rem 0.2rem;
+  font-size: 1.2rem;
+  margin-top: 0.6rem;
+  padding: 0.6rem 0.2rem;
   background-color: #f8f9fa;
 }
 
@@ -238,34 +238,34 @@
 /* Thank You Section */
 .thank-you {
   text-align: center;
-  margin: 1.5rem 0;
-  padding: 1rem 0;
+  margin: 1rem 0 0.8rem 0;
+  padding: 0.6rem 0;
 }
 
 .thank-you p {
-  font-size: 1rem;
-  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  margin: 0.3rem 0;
   color: #333;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .visit-again {
   font-weight: bold !important;
-  margin-top: 0.8rem !important;
-  font-size: 1.1rem !important;
+  margin-top: 0.5rem !important;
+  font-size: 1.05rem !important;
 }
 
 /* Receipt Footer */
 .receipt-footer {
   text-align: center;
-  margin-bottom: 1.5rem;
-  padding-top: 1rem;
+  margin-bottom: 1rem;
+  padding-top: 0.6rem;
   border-top: 1px dashed #ccc;
 }
 
 .receipt-footer p {
-  font-size: 0.9rem;
-  margin: 0.4rem 0;
+  font-size: 0.85rem;
+  margin: 0.3rem 0;
   color: #666;
   display: flex;
   align-items: center;
@@ -276,21 +276,21 @@
 /* Done Section */
 .done-section {
   text-align: center;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
+  margin-top: 1.2rem;
+  padding-top: 1rem;
   border-top: 2px dashed #ccc;
 }
 
 .done-button {
   background: #28a745 !important;
   color: white !important;
-  padding: 1rem 2.5rem !important;
+  padding: 0.8rem 2rem !important;
   font-weight: bold !important;
   border-radius: 8px !important;
   text-transform: uppercase !important;
   letter-spacing: 1px !important;
-  min-width: 180px !important;
-  font-size: 1rem !important;
+  min-width: 160px !important;
+  font-size: 0.95rem !important;
 }
 
 .done-button:hover {
@@ -300,12 +300,16 @@
 
 /* Responsive Design */
 @media (max-width: 576px) {
+  .bill-container {
+    padding: 0.5rem;
+  }
+  
   .receipt-container {
-    padding: 1.5rem;
+    padding: 1rem;
   }
   
   .store-name {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   
   .items-table-header {
@@ -329,11 +333,11 @@
   }
   
   .receipt-divider {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
   
   .detail-line {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   
   .detail-line span:last-child {
@@ -341,7 +345,7 @@
   }
   
   .total-line {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   
   .total-line span:last-child {
@@ -349,17 +353,17 @@
   }
   
   .final-total {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 }
 
 @media (max-width: 480px) {
   .bill-container {
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
   }
   
   .receipt-container {
-    padding: 1rem;
+    padding: 0.8rem;
   }
   
   .items-table-header {
@@ -371,7 +375,7 @@
   }
   
   .store-name {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
   
   .final-total {

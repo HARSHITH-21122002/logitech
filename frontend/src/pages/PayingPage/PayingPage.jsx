@@ -31,7 +31,7 @@ export default function PayingPage() {
 
   const [paymentStatus, setPaymentStatus] = useState("loading");
   const [error, setError] = useState(null);
-  const [countdown, setCountdown] = useState(180);
+  const [countdown, setCountdown] = useState(60);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [retryTrigger, setRetryTrigger] = useState(0);
 
@@ -177,7 +177,7 @@ export default function PayingPage() {
       setPaymentStatus("loading");
       setError(null);
       setPollingError(null); // Reset polling error on new attempt
-      setCountdown(180);
+      setCountdown(60);
       isHandlingPostPayment.current = false;
 
       try {
@@ -214,11 +214,10 @@ export default function PayingPage() {
 
 
         pollingIntervalRef.current = setInterval(checkStatus, 4000);
-        pollingTimeoutRef.current = setTimeout(() => {
-          if (pollingIntervalRef.current) {
-            handlePaymentFailure("Payment confirmation timed out. Please try again.");
-          }
-        }, 178000);
+       pollingTimeoutRef.current = setTimeout(() => {
+          stopPolling();
+          navigate("/home", { replace: true });
+        }, 60000);
 
       } catch (err) {
         handlePaymentFailure(err.message);
@@ -235,6 +234,7 @@ export default function PayingPage() {
       timer = setInterval(() => setCountdown((prev) => prev - 1), 1000);
     } else if (countdown === 0 && paymentStatus === "pending") {
       handlePaymentFailure("Timer expired. Please try again.");
+    
     }
     return () => clearInterval(timer);
   }, [paymentStatus, countdown, handlePaymentFailure]);
@@ -244,10 +244,10 @@ export default function PayingPage() {
     navigate("/payment", { state: { ...location.state }, replace: true });
   };
 
-  const handleRetry = () => {
-    stopPolling();
-    setRetryTrigger(c => c + 1);
-  };
+  // const handleRetry = () => {
+  //   stopPolling();
+  //   setRetryTrigger(c => c + 1);
+  // };
 
   if (paymentStatus === "failed") {
     return (
@@ -263,7 +263,7 @@ export default function PayingPage() {
         </main>
         <footer className="failed-footer-upi">
           <button className="failed-action-btn-upi" onClick={handleCancel}>Change Method</button>
-          <button className="failed-action-btn-upi primary-upi" onClick={handleRetry}>Retry Payment</button>
+          {/* <button className="failed-action-btn-upi primary-upi" onClick={handleRetry}>Retry Payment</button> */}
         </footer>
       </div>
     );
